@@ -30,13 +30,23 @@
         },
         methods:{
             newThought(){
-                const thought= {
+                const params = {
+                    description:this.description
+                };
+                this.description = '';
+                axios.post('/thoughts',params)
+                    .then(response => {
+                        const thought=response.data;
+                        this.$emit('new',thought);
+                    })
+                    .catch (response => {
+                    // List errors on response...
+                    });
+                /*let thought= {
                     id:2,
                     description:this.description,
                     created_at:'29/09/2018'
-                };
-                this.$emit('new',thought);
-                this.description = '';
+                };*/
             }
         }
     }
